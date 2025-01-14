@@ -17,13 +17,13 @@ class OutputView {
 
     private fun createResult(strike: Int, ball: Int): String {
         return when {
-            strike == 0 && ball == 0 -> OutputConst.NOTHING.toString()
+            strike == 0 && ball == 0 -> OutputConst.NOTHING.s
 
-            ball == 0 -> String.format(OutputConst.STRIKE.toString(), strike)
+            ball == 0 -> String.format(OutputConst.STRIKE.s, strike)
 
-            strike == 0 -> String.format(OutputConst.BALL.toString(), ball)
+            strike == 0 -> String.format(OutputConst.BALL.s, ball)
 
-            else -> String.format(OutputConst.BALL.toString(), ball) + String.format(OutputConst.STRIKE.toString(), strike)
+            else -> String.format(OutputConst.BALL.s, ball) + String.format(OutputConst.STRIKE.s, strike)
         }
     }
 }
