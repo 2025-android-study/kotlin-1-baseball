@@ -8,11 +8,11 @@ class OutputView {
     }
 
     fun printStart() {
-        println(OutputConst.GAME_START)
+        println(OutputConst.GAME_START.s)
     }
 
     fun printFinish() {
-        println(OutputConst.GAME_FINISHED)
+        println(OutputConst.GAME_FINISHED.s)
     }
 
     private fun createResult(strike: Int, ball: Int): String {

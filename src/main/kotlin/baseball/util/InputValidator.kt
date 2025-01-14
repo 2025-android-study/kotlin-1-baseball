@@ -1,4 +1,4 @@
-package baseball.validation
+package baseball.util
 
 import baseball.consts.ErrorConst
 import baseball.consts.Rule
