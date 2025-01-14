@@ -41,11 +41,11 @@ class BaseballGame {
     private fun handleUserInput() {
         print(INPUT_GUIDE) // 입력 문구
         val input = Console.readLine()
-        inputValidator.setUserInput(input)
-        val isValidInput = inputValidator.checkIsValidInput()
-        if (isValidInput) {
-            userInputNumArr = Converter.convertStringToIntArr(input)
-        }
+
+        inputValidator.setUserInput(input) // 입력 정보 세팅
+        inputValidator.checkIsValidInput() // 유효한 입력인지 확인
+
+        userInputNumArr = Converter.convertStringToIntArr(input) // 유효한 입력이라면 숫자 배열로 변환
 //        println("userInputNumArr: $userInputNumArr")
     }
 }

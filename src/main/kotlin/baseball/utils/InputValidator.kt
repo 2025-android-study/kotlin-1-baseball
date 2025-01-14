@@ -4,19 +4,16 @@ import baseball.constants.GAME_DIGIT
 
 object InputValidator {
     private lateinit var inputString: String
-    val regex = "[0-9]".toRegex()
+    val regex = "[1-9]".toRegex()
 
     fun setUserInput(input: String) {
         inputString = input
     }
 
-    fun checkIsValidInput(): Boolean {
-        try {
-            inputString.toInt() // 숫자 확인 과정
-            return isLengthOK() && isAllValidDigit() && isUniqueDigit()
-        } catch(e: Exception) {
-            throw IllegalArgumentException(e) // 에러 출력
-        }
+    fun checkIsValidInput() {
+        check(isLengthOK()) { "${GAME_DIGIT}자리 숫자를 입력해야 합니다." }
+        check(isAllValidDigit()) { "모든 자리는 숫자여야 합니다." }
+        check(isUniqueDigit()) { "각 자리 숫자는 서로 달라야 합니다." }
     }
 
     // 게임 기준 숫자와 사용자 입력 길이 비교
