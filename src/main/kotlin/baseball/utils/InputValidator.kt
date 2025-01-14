@@ -12,10 +12,10 @@ object InputValidator {
 
     fun checkIsValidInput(): Boolean {
         try {
-            inputString.toInt()
-            return isLengthOK() && isAllValidDigit()
+            inputString.toInt() // 숫자 확인 과정
+            return isLengthOK() && isAllValidDigit() && isUniqueDigit()
         } catch(e: Exception) {
-            throw IllegalArgumentException(e)
+            throw IllegalArgumentException(e) // 에러 출력
         }
     }
 
@@ -31,5 +31,12 @@ object InputValidator {
             if (!regex.matches(char.toString())) return false // 유효한 숫자가 아닌 경우 바로 false를 리턴
         }
         return true
+    }
+
+    // 각 자리가 유니크한 숫자인지 확인
+    private fun isUniqueDigit(): Boolean {
+        val originalCharArr = inputString.toCharArray() // 기본
+        val duplicationCharRemovedArr = originalCharArr.distinct() // 중복 문자 제거
+        return originalCharArr.size == duplicationCharRemovedArr.size
     }
 }
