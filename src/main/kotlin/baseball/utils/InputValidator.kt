@@ -1,6 +1,7 @@
 package baseball.utils
 
 import baseball.constants.GAME_DIGIT
+import baseball.enums.GameRestartCondition
 
 object InputValidator {
     private lateinit var inputString: String
@@ -10,10 +11,21 @@ object InputValidator {
         inputString = input
     }
 
-    fun checkIsValidInput() {
+    // 유저가 입력한 숫자
+    fun checkUserGuessDigitValidation() {
         check(isLengthOK()) { "${GAME_DIGIT}자리 숫자를 입력해야 합니다." }
         check(isAllValidDigit()) { "모든 자리는 숫자여야 합니다." }
         check(isUniqueDigit()) { "각 자리 숫자는 서로 달라야 합니다." }
+    }
+
+    // 유저가 입력한 게임 종료 숫자
+    fun checkUserGameRestartValidation() {
+        try {
+            val inputValue = inputString.toInt()
+            check(isGameRestartCondition(inputValue)) { "입력값은 ${GameRestartCondition.RESTART.value} 또는 ${GameRestartCondition.EXIT.value}여야 합니다" }
+        } catch (e: Exception) {
+            throw IllegalArgumentException("입력값은 숫자여야 합니다")
+        }
     }
 
     // 게임 기준 숫자와 사용자 입력 길이 비교
@@ -35,5 +47,10 @@ object InputValidator {
         val originalCharArr = inputString.toCharArray() // 기본
         val duplicationCharRemovedArr = originalCharArr.distinct() // 중복 문자 제거
         return originalCharArr.size == duplicationCharRemovedArr.size
+    }
+
+    // 게임 종료 조건에 해당하는 숫자인지 확인
+    private fun isGameRestartCondition(value: Int): Boolean {
+        return (value == GameRestartCondition.RESTART.value) || (value == GameRestartCondition.EXIT.value)
     }
 }
